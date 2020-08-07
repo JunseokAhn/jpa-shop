@@ -1,23 +1,22 @@
-package jpashop3.domain3;
+package jpashop4.domain4;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn
-public abstract class Item3 extends BaseEntity3 {
+@DiscriminatorColumn
+public class Item4 extends BaseEntity4 {
 
     @Id @GeneratedValue
     @Column(name = "ITEM_ID")
     private Long id;
-
     private String name;
     private int price;
-    private int stackQuantity;
+    private int stockQuantity;
 
     @ManyToMany(mappedBy = "items")
-    private List<Category3> categories;
+    private List<Category4> categories;
 
     public Long getId() {
         return id;
@@ -43,19 +42,19 @@ public abstract class Item3 extends BaseEntity3 {
         this.price = price;
     }
 
-    public int getStackQuantity() {
-        return stackQuantity;
+    public int getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setStackQuantity(int stackQuantity) {
-        this.stackQuantity = stackQuantity;
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
-    public List<Category3> getCategories() {
+    public List<Category4> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category3> categories) {
+    public void setCategories(List<Category4> categories) {
         this.categories = categories;
     }
 }
