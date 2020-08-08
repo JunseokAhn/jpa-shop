@@ -11,7 +11,7 @@ public class OrderItem4 {
     @Column(name = "ORDER_ITEM_ID")
     private Long id;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "ITEM_ID")
     private Item4 item;
 

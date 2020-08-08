@@ -2,6 +2,7 @@ package jpashop4.domain4;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class Order4 {
     private Member4 member;
 
     @OneToMany(mappedBy = "order", cascade = ALL)
-    private List<OrderItem4> orderItems;
+    private List<OrderItem4> orderItems = new ArrayList<>();
 
     @OneToOne(mappedBy = "order", cascade = ALL)
     private Delivery4 delivery;

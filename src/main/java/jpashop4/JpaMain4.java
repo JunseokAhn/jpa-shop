@@ -14,26 +14,34 @@ public class JpaMain4 {
         EntityManager EM = EMF.createEntityManager();
         EntityTransaction ET = EM.getTransaction();
 
-        Order4 order = new Order4();
-        Delivery4 delivery = new Delivery4();
-        OrderItem4 orderItem = new OrderItem4();
+        try {
+            ET.begin();
 
-        Movie4 movie = new Movie4();
-        movie.setActor("Junseok");
-        movie.setDirector("Junsoku");
+            Order4 order = new Order4();
+            Delivery4 delivery = new Delivery4();
+            OrderItem4 orderItem = new OrderItem4();
 
-        //1. 상속으로 movie를 item에 연결했는데, 그럼, ordetItem에는 item을 어떻게 집어넣지?
-        //Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-        //Exception in thread "main" java.lang.NullPointerException
-        //2. @DiscriminatorColumn??
+            Movie4 movie = new Movie4();
+            movie.setActor("Junseok");
+            movie.setDirector("Junsoku");
 
-        order.addDelivery(delivery);
-        order.addOrderItem(orderItem);
+            //1. 상속으로 movie를 item에 연결했는데, 그럼, ordetItem에는 item을 어떻게 집어넣지?
+            // >> 자바의 다형성으로 굳이item이 아니더라도 movie등을 집어넣을수있다
 
+            orderItem.setItem(movie);
 
-        ET.begin();
-        ET.commit();
-        EM.close();
+            order.addDelivery(delivery);
+            order.addOrderItem(orderItem);
+
+            EM.persist(order);
+
+            ET.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ET.rollback();
+        } finally {
+            EM.close();
+        }
         EMF.close();
     }
 }

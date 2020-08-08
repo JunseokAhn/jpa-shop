@@ -1,6 +1,7 @@
 package jpashop4.domain4;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,7 +17,7 @@ public class Item4 extends BaseEntity4 {
     private int stockQuantity;
 
     @ManyToMany(mappedBy = "items")
-    private List<Category4> categories;
+    private List<Category4> categories = new ArrayList<>();
 
     public Long getId() {
         return id;

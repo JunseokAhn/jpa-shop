@@ -1,6 +1,7 @@
 package jpashop4.domain4;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class Member4 {
     private String zipcode;
 
     @OneToMany(mappedBy = "member")
-    private List<Order4> orders;
+    private List<Order4> orders = new ArrayList<>();
 
     public Long getId() {
         return id;
