@@ -1,23 +1,23 @@
-package jpashop4.domain4;
+package Jpashop5.domain5;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn
-public class Item4 extends BaseEntity4 {
+@DiscriminatorColumn
+public class Item5 {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "ITEM_ID")
     private Long id;
     private String name;
     private int price;
-    private int stockQuantity;
+    private int stackQuantity;
 
-    @ManyToMany(mappedBy = "items")
-    private List<Category4> categories = new ArrayList<>();
+    @OneToMany(mappedBy = "item")
+    private List<CategoryItem5> categoryItems;
 
     public Long getId() {
         return id;
@@ -43,19 +43,19 @@ public class Item4 extends BaseEntity4 {
         this.price = price;
     }
 
-    public int getStockQuantity() {
-        return stockQuantity;
+    public int getStackQuantity() {
+        return stackQuantity;
     }
 
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
+    public void setStackQuantity(int stackQuantity) {
+        this.stackQuantity = stackQuantity;
     }
 
-    public List<Category4> getCategories() {
-        return categories;
+    public List<CategoryItem5> getCategoryItems() {
+        return categoryItems;
     }
 
-    public void setCategories(List<Category4> categories) {
-        this.categories = categories;
+    public void setCategoryItems(List<CategoryItem5> categoryItems) {
+        this.categoryItems = categoryItems;
     }
 }
